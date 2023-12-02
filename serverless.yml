@@ -9,7 +9,7 @@ custom:
 
 provider:
   name: aws
-  stackName: "${selt:custom.custonName}-stack"
+  stackName: "${self:custom.custonName}-stack"
   runtime: nodejs14.x
   region: us-east-1
   stage: '${opt:stage, sls:stage, "dev"}'
