@@ -42,10 +42,10 @@ resources:
       Properties:
         Name: ${self:custom.secretAuthorizationClientID}
         Description: "Secrets with Basic Authorization"
-        SecretString: "${env:SECRET_AUTHORIZER_CLIENT_ID}"
+        SecretString: "${env:SECRET_AUTHORIZATION_CLIENT_ID}"
     SecretAuthorizationPassword:
       Type: AWS::SecretsManager::Secret
       Properties:
         Name: ${self:custom.secretAuthorizationPassword}
         Description: "Secrets with Basic Authorization"
-        SecretString: "${env:SECRET_AUTHORIZER_PASSWORD}"
+        SecretString: "${env:SECRET_AUTHORIZATION_PASSWORD}"
