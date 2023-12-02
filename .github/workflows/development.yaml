@@ -49,3 +49,5 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.MY_AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.MY_AWS_SECRET_ACCESS_KEY }}
+          SECRET_AUTHORIZER_CLIENT_ID: ${{ secrets.SECRET_AUTHORIZER_CLIENT_ID }}
+          SECRET_AUTHORIZER_PASSWORD: ${{ secrets.SECRET_AUTHORIZER_PASSWORD }}
