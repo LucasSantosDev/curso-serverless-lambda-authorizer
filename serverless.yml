@@ -18,8 +18,8 @@ provider:
   timeout: 180
   environment:
     NODE_PATH: "./:/opt"
-    SECRET_AUTHORIZATION_CLIENT_ID: ${self:custom.secretAuthorizationClientID}
-    SECRET_AUTHORIZATION_PASSWORD: ${self:custom.secretAuthorizationPassword}
+    SECRET_AUTHORIZER_CLIENT_ID: ${self:custom.secretAuthorizationClientID}
+    SECRET_AUTHORIZER_PASSWORD: ${self:custom.secretAuthorizationPassword}
   iamRoleStatements:
     - Effect: "Allow"
       Action: "secretsmanager:GetSecretValue"
@@ -42,10 +42,10 @@ resources:
       Properties:
         Name: ${self:custom.secretAuthorizationClientID}
         Description: "Secrets with Basic Authorization"
-        SecretString: "${env:SECRET_AUTHORIZATION_CLIENT_ID}"
+        SecretString: "${env:SECRET_AUTHORIZER_CLIENT_ID}"
     SecretAuthorizationPassword:
       Type: AWS::SecretsManager::Secret
       Properties:
         Name: ${self:custom.secretAuthorizationPassword}
         Description: "Secrets with Basic Authorization"
-        SecretString: "${env:SECRET_AUTHORIZATION_PASSWORD}"
+        SecretString: "${env:SECRET_AUTHORIZER_PASSWORD}"
