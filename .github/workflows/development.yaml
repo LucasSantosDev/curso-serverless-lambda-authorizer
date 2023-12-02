@@ -1,0 +1,51 @@
+name: Deploy development
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ProcessDefault:
+    name: Process default to deploy
+    runs-on: ubuntu-latest
+    # if: ${{ github.ref == 'refs/heads/develop' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Using nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Install packages
+        run: yarn install
+
+      - name: Zip artifact
+        run: zip release.zip ./* -r
+
+      - name: Upload files
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts
+          path: release.zip
+  Deploy:
+    name: Deploy Application
+    needs: ProcessDefault
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download
+        uses: actions/download-artifact@v3
+        with:
+          name: artifacts
+
+      - name: Unzip files
+        run: unzip release.zip
+
+      - name: Deploy serverless
+        uses: serverless/github-action@v3.1
+        with:
+          args: deploy --stage dev
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.MY_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.MY_AWS_SECRET_ACCESS_KEY }}

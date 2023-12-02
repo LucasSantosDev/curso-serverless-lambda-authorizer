@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "dependencies": {
-    "jsonwebtoken": "^9.0.2"
+  "dependencies": {},
+  "scripts": {
+    "deploy:dev": "sls deploy --stage dev",
+    "deploy:hml": "sls deploy --stage hml"
   },
   "devDependencies": {
     "serverless": "^3.38.0"

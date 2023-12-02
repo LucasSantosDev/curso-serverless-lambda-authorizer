@@ -1,0 +1,27 @@
+service: lambda-authorizer-example
+
+frameworkVersion: "3"
+
+useDotenv: true
+
+custom:
+  custonName: 'lambda-authorizer-${opt:stage, sls:stage, "dev"}'
+
+provider:
+  name: aws
+  stackName: "${selt:custom.custonName}-stack"
+  runtime: nodejs14.x
+  region: us-east-1
+  stage: '${opt:stage, sls:stage, "dev"}'
+  timeout: 180
+  environment:
+    NODE_PATH: "./:/opt"
+
+functions:
+  health-check:
+    name: '${self:custom.custonName}-${opt:stage, sls:stage, "dev"}-health-check'
+    handler: src/healthcheck.handler
+    events:
+      - http:
+          path: health-check
+          method: get
