@@ -3,7 +3,7 @@ module.exports.handler = async (event, context, callback) => {
   const clientID = process.env.SECRET_AUTHORIZER_CLIENT_ID
   const clientPassword = process.env.SECRET_AUTHORIZER_PASSWORD
 
-  const token = getToken(event, 'authorizationToken')
+  const token = getToken(event, 'authorization')
 
   const isValid = await tokenIsValid(token, clientID, clientPassword)
 
