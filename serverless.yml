@@ -33,7 +33,7 @@ functions:
       - http:
           path: health-check-rest
           method: get
-          private: true
+          # private: true
           authorizer: custom-authorizer-rest
 
   custom-authorizer-rest:

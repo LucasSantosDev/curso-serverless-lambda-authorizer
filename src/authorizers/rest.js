@@ -54,7 +54,7 @@ const unAuthorized = () => {
 }
 
 module.exports.handler = async (event, context, callback) => {
-  const { methodArn } = event
+  const { methodArn: resource } = event
   const clientID = process.env.SECRET_AUTHORIZER_CLIENT_ID
   const clientPassword = process.env.SECRET_AUTHORIZER_PASSWORD
 
@@ -63,6 +63,6 @@ module.exports.handler = async (event, context, callback) => {
   const isValid = await tokenIsValid(token, clientID, clientPassword)
 
   return isValid
-    ? callback(null, nextHandle(methodArn))
+    ? callback(null, nextHandle(resource))
     : callback(unAuthorized())
 }
