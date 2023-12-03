@@ -6,8 +6,8 @@ useDotenv: true
 
 custom:
   custonName: 'lambda-authorizer-${opt:stage, sls:stage, "dev"}'
-  secretAuthorizationClientID: "secret-authorization-client-id"
-  secretAuthorizationPassword: "secret-authorization-password"
+  secretAuthorizationClientID: 'secret-authorization-client-id-${opt:stage, sls:stage, "dev"}'
+  secretAuthorizationPassword: 'secret-authorization-password-${opt:stage, sls:stage, "dev"}'
 
 provider:
   name: aws
