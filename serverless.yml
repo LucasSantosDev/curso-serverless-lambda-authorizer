@@ -24,6 +24,11 @@ provider:
     - Effect: "Allow"
       Action: "secretsmanager:GetSecretValue"
       Resource: "*"
+  httpApi:
+    authorizers:
+      customAuthorizerHttp:
+        type: request
+        functionName: custom-authorizer-http
 
 functions:
   health-check-rest:
@@ -35,8 +40,21 @@ functions:
           method: get
           authorizer: custom-authorizer-rest
 
+    health-check-http:
+      name: "${self:custom.custonName}-health-check-http"
+      handler: src/healthcheck.handler
+      events:
+        - httpApi:
+            path: health-check-http
+            method: get
+            authorizer:
+              name: customAuthorizerHttp
+
   custom-authorizer-rest:
     handler: src/authorizers/rest.handler
+
+  custom-authorizer-http:
+    handler: src/authorizers/http.handler
 
 resources:
   Resources:
