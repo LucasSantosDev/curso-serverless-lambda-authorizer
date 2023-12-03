@@ -26,13 +26,18 @@ provider:
       Resource: "*"
 
 functions:
-  health-check:
-    name: '${self:custom.custonName}-${opt:stage, sls:stage, "dev"}-health-check'
+  health-check-rest:
+    name: '${self:custom.custonName}-${opt:stage, sls:stage, "dev"}-health-check-rest'
     handler: src/healthcheck.handler
     events:
       - http:
-          path: health-check
+          path: health-check-rest
           method: get
+          private: true
+          authorizer: custom-authorizer-rest
+
+  custom-authorizer-rest:
+    handler: src/authorizers/rest.handler
 
 resources:
   Resources:
