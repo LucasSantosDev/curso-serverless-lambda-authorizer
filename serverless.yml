@@ -40,15 +40,15 @@ functions:
           method: get
           authorizer: custom-authorizer-rest
 
-    health-check-http:
-      name: "${self:custom.custonName}-health-check-http"
-      handler: src/healthcheck.handler
-      events:
-        - httpApi:
-            path: health-check-http
-            method: get
-            authorizer:
-              name: customAuthorizerHttp
+  health-check-http:
+    name: "${self:custom.custonName}-health-check-http"
+    handler: src/healthcheck.handler
+    events:
+      - httpApi:
+          path: /health-check-http
+          method: get
+          authorizer:
+            name: customAuthorizerHttp
 
   custom-authorizer-rest:
     handler: src/authorizers/rest.handler

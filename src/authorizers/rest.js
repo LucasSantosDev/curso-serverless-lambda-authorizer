@@ -1,3 +1,12 @@
+'use strict'
+
+const {
+  tokenIsValid,
+  getToken,
+  nextHandle,
+  unAuthorized,
+} = require('../utils/authorizer')
+
 module.exports.handler = async (event, context, callback) => {
   const { methodArn: resource } = event
   const clientID = process.env.SECRET_AUTHORIZER_CLIENT_ID
