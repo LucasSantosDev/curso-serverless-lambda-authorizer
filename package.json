@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "aws-sdk": "^2.1510.0"
+  },
   "scripts": {
     "deploy:dev": "sls deploy --stage dev",
     "deploy:hml": "sls deploy --stage hml"
